@@ -22,9 +22,9 @@ function App() {
        {
          users.map(user => {
            return <div className="user">
-             <p className='user-name'>{user.name}</p>
-             <p className='user-email'>{user.email}</p>
-             <p>{user.password = '******'}</p>
+             <p className='user-name'>Name: {user.name}</p>
+             <p className='user-email'>Email: {user.email}</p>
+             <p>Password {user.password = '******'}</p>
            </div>
          })
        }

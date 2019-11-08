@@ -3,9 +3,9 @@ import axios from 'axios';
 import { withFormik, Form, Field } from 'formik';
 import *as Yup from 'yup';
 import './UserForm.css';
-import { removeProperties } from '@babel/types';
 
-const UserForm = ({handleReset, touched, errors}) => {
+
+const UserForm = ({values,touched, errors,handleReset, resetForm}) => {
 
     
 
@@ -17,18 +17,21 @@ const UserForm = ({handleReset, touched, errors}) => {
         type="text"
          name="name" 
          placeholder="Name"
+         value={values.name || ''}
          />
          {touched.name && errors.name && <p>{errors.name}</p>}
         <Field 
         type="email" 
         name="email" 
         placeholder="email"
+        value={values.email || ''}
         />
         {touched.email && errors.email && <p>{errors.email}</p>}
         <Field 
         type="password" 
         name="password" 
-        placeholder="Password" 
+        placeholder="Password"
+        value={values.password || ''} 
         />
         <div className="terms-and-conditions">
             <h3 className="terms-header">Terms and Conditions</h3>
@@ -39,7 +42,7 @@ const UserForm = ({handleReset, touched, errors}) => {
             <Field className='terms' name='terms' type="checkbox" placeholder='Agree to Terms'/>
         </div>
         
-        <input type="submit"/>
+        <input className='submit' type="submit"/>
     </Form>
     );
 }
@@ -64,7 +67,7 @@ const FormikForm = withFormik({
         terms: Yup.boolean().oneOf([true], "You must agree to the terms.")
 
     }),
-    handleSubmit(values,{ props,tools,setSubmitting})  {
+    handleSubmit(values,{ props,tools,resetForm})  {
         console.log(values)
         const newUser = {
             ...values
@@ -72,6 +75,7 @@ const FormikForm = withFormik({
         console.log(newUser)
         props.addUser(newUser)
         console.log(props.users)
+        resetForm();
   
         axios
         .post('https://reqres.in/api/users/',values)

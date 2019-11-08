@@ -3,6 +3,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 233, 255,.3);
+    height: 70vh;
 }
 
 input {
@@ -15,4 +17,16 @@ input {
 .terms-and-conditions {
     border: 1px solid black;
     padding: 3%;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.submit {
+    border-radius: 11px;
+    margin-top: 1em;
+    background-color: blue;
+    color: white;
+    width: 50%;
+    font-size: 1.3em;
+    text-align: center;
+    vertical-align: middle;
 }
